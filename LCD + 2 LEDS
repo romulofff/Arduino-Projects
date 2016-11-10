@@ -1,0 +1,84 @@
+/* Projeto: Display LCD + LEDS 
+ * Autor: Rômulo Férrer Filho
+ * Engenharia de Computação - Universidade Federal do Ceará
+ * Neste projeto dois LEDs piscam simultaneamente e no monitor LCD indica o estado dos LEDs
+ * se estes estão acesos ou apagados.
+ */
+
+
+#include <LiquidCrystal.h>  //Inclui a biblioteca de controle do monitor LCD
+const int led1 = 6; //Pino digital onde está ligado o LED 1 
+int led1status; //Status do LED 1 (aceso ou apagado)
+
+const int led2 = 7; //Pino digital onde está ligado o LED 2
+int led2status; //Status do LED 2 (aceso ou apagado)
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2); //Esta linha cria o objeto lcd do tipo LiquidCrystal e indica em quais pinos do arduino o monitor LCD está ligado
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(led1, OUTPUT); //Define o LED 1 como saída
+  pinMode(led2, OUTPUT); //Define o LED 2 como saída
+  
+  lcd.begin(16,2); //Inicializa o LCD, entre parenteses está o tamanho da tela: 16 colunas e 2 linhas
+  lcd.setCursor(0,0); //Coloca o cursor (posição onde será escrito) coluna 0, linha 0
+  lcd.print("Oi mundo!"); //Mensagem apenas para indicar o funcionamento do monitor
+  lcd.setCursor(0,1); //Coloca o cursor na coluna 0, linha 1
+  lcd.print("READY TO START"); ////Mensagem apenas para indicar o funcionamento do monitor
+  delay(1000); //Mantem ambas mensgaens por 1 segundo na tela
+  lcd.setCursor(0,0); 
+  lcd.print("                 "); //Imprime 16 espaços em branco correspondentes às 16 colunas do monitor, apagando todo o seu conteúdo
+  lcd.setCursor(0,1);
+  lcd.print("                 "); //Faz o mesmo na segunda linha
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  lcd.setCursor(0,0);
+  
+  digitalWrite(led1, HIGH); //Acende o LED 1
+  led1status = HIGH; //Muda o status do LED 1 para aceso (HIGH)
+  
+  if(led1status == HIGH){ //If para confirmar o status do LED 1
+    lcd.print("LED 1 Aceso"); //Imprime no monitor o status do LED 1
+  }
+
+  lcd.setCursor(0,1);
+  digitalWrite(led2, HIGH); //Acende o LED 2
+  led2status = HIGH; //Muda o status do LED 2 para aceso (HIGH)
+  if(led2status == HIGH){ //If para confirmar o status do LED 2
+    lcd.print("LED 2 Aceso"); //Imprime no monitor o satus do LED 2
+  }
+
+  delay(2000);
+  
+  lcd.setCursor(0,0);
+  lcd.print("               ");
+  digitalWrite(led1, LOW); //Apaga o LED 1
+  led1status = LOW; //Muda o status do LED 1 para apagado (LOW)
+  lcd.setCursor(0,0);
+  if(led1status == LOW){
+    lcd.print("LED 1 Apagado");
+  }
+  //ESSE TERCEIRO BLOCO APAGA O LED 1 E DIGITA NO MONITOR
+  lcd.setCursor(0,1);
+  lcd.print("               ");
+  digitalWrite(led2, LOW); //Apaga o LED 2
+  led2status = LOW; //Muda o status do LED 2 para apagado (LOW)
+  lcd.setCursor(0,1);
+  if(led2status == LOW){
+    lcd.print("LED 2 Apagado");
+  }
+
+  //ESSE QUARTO BLOCO APAGA O LED 2 E DIGITA NO MONITOR
+  
+  delay(2000);
+  lcd.setCursor(0,0);
+  lcd.print("               ");
+  lcd.setCursor(0,1);
+  lcd.print("               ");
+
+  //ESSE QUINTO BLOCO APAGA AS LINHAS DO MONITOR
+  
+}
