@@ -3,6 +3,7 @@
  * Engenharia de Computação - Universidade Federal do Ceará
  * Neste projeto dois LEDs piscam simultaneamente e no monitor LCD indica o estado dos LEDs
  * se estes estão acesos ou apagados.
+ * Eu utilizei apenas dois LEDs, pois era só um teste e também porque meu monitor é pequeno, apenas 16x2, entretanto a quantidade depende do desenvolverdor
  */
 
 
