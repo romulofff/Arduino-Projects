@@ -1,0 +1,33 @@
+/* Projeto: Servo motor automático 
+ * Autor: Rômulo Férrer Filho
+ * Engenharia de Computação - Universidade Federal do Ceará
+ * Neste projeto fiz um pequeno teste utilizando um sevo motor. Quando ligado o servo gira 180º e em seguida retorna a posição inicial.
+ */
+#include <Servo.h> //Biblioteca padrão
+ 
+#define SERVO 6 // Porta Digital 6 PWM
+ 
+Servo s; // Variável Servo
+int pos; // Posição Servo
+ 
+void setup ()
+{
+  s.attach(SERVO); //Conecta a variável s ao servo conectado
+  Serial.begin(9600); //Inicia o monitor serial
+  s.write(0); // Inicia motor posição zero
+}
+ 
+void loop()
+{
+  for(pos = 0; pos < 180; pos++) 
+  { // Faz a contagem da posição de 0 a 180 representando o ângulo de movimento
+    s.write(pos); // Move o servo para a posição
+  delay(15); //Espera o servo chegar na posição
+  }
+delay(1000);
+  for(pos = 180; pos >= 0; pos--)
+  {
+    s.write(pos);
+    delay(15);
+  }
+}
